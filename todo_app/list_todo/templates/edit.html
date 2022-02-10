@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} edit {% endblock %}
+
+{% block content %}
+  {% if item %}
+
+    <br>
+    <div class="card col-6">
+      <div class="card-body">
+        <form class="d-flex" method="POST">
+          {% csrf_token %}
+          <fieldset>
+          <input class="form-control me-2" type="search" placeholder="{{item.item}}" value="{{item.item}}" aria-label="Search" name="item">
+          <br>
+          <input class="form-control me-2" type="search" placeholder="{{item.description}}" value="{{item.description}}" aria-label="Description" name="description">
+          <br>
+          <input class="form-control me-2" type="hidden" value="{{ item.completed }}" name="completed">
+          <button class="btn btn-outline-success" type="submit">save</button>
+          <fieldset>
+        </form>
+      </div>
+  {% endif %}
+{% endblock %}

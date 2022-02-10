@@ -1,0 +1,47 @@
+
+{% extends 'base.html' %}
+
+{% block title %} list {% endblock %}
+
+{% block content %}
+
+{% if list_items %}
+
+  <br>
+  <div class="card-group">
+  {% for thing in list_items %}
+  <div class="card">
+    <div class="card-body">
+
+      {% if thing.completed %}
+        <h5 class="card-title" style="text-decoration: line-through;"> {{ thing.item }}</h5>
+        <p class="card-text">{{ thing.description }}</p>
+        <a href="{% url 'delete' thing.id %}" class="btn btn-danger">remove</a>
+        <a href="{% url 'edit' thing.id %}" class="btn btn-dark">edit</a>
+      {% else %}
+        <h5 class="card-title"> {{ thing.item }}</h5>
+        <p class="card-text">{{ thing.description }}</p>
+        <a href="{% url 'complete' thing.id %}" class="btn btn-dark">complete</a>
+        <a href="{% url 'edit' thing.id %}" class="btn btn-dark">edit</a>
+      {% endif %}
+    </div>
+    <div class="card-footer">
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+{% endif %}
+
+{% if messages %}
+
+  {% for mes in messages%}
+
+  <br>
+  <div class="alert alert-dark" role="alert">
+    {{ mes }}
+  </div>
+  {% endfor %}
+{% endif %}
+
+{% endblock %}
